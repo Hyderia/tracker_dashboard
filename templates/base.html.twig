@@ -2,16 +2,59 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
-
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>
+            {% block title %}{% endblock %}
+        </title>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+        {{ importmap('app') }}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <div class="wrapper">
+            <nav id="sidebar" class="sidebar js-sidebar">
+                <div class="sidebar-content js-simplebar">
+                    <a class="sidebar-brand" href="{{ path('dashboard') }}">
+                        <span class="align-middle">Tracker</span>
+                    </a>
+                    <ul class="sidebar-nav">
+                        <li class="sidebar-item {% if page == 'dashboard' %}active{% endif %}">
+                            <a class="sidebar-link" href="{{ path('dashboard') }}">
+                                <i class="align-middle" data-feather="sliders"></i>
+                                <span class="align-middle">
+                                    {% trans %}Tableau de bord{% endtrans %}
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="main">
+                <nav class="navbar navbar-expand navbar-light navbar-bg">
+                    <a class="sidebar-toggle js-sidebar-toggle">
+                        <i class="hamburger align-self-center"></i>
+                    </a>
+                </nav>
+                <main class="content">
+                    <div class="container-fluid p-0">
+                        <h1 class="h3 mb-3">
+                            {{ block('title') }}
+                        </h1>
+                        {% block body %}{% endblock %}
+                    </div>
+                </main>
+                <footer class="footer">
+                    <div class="container-fluid">
+                        <div class="row text-muted">
+                            <div class="col-6 text-start">
+                                <p class="mb-0">
+                                    Thomas JORGE &copy; {{ 'now'|date('Y') }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
     </body>
 </html>
